@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import "./App.css";
+
+const TodoList = () => {
+  const [taskName, setTaskName] = useState('')
+  const [dateTime, setdateTime] = useState('')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Chris Akua Todo</h1>
+      <form>
+        <input type="text" value={taskName} />
+        <input type="dateTime-local" value={dateTime} />
+      </form>
     </div>
   );
 }
 
-export default App;
+export default TodoList;

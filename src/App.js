@@ -10,7 +10,7 @@ const TodoList = () => {
       <h1>Chris Akua Todo</h1>
       <form>
         <input type="text" value={taskName} />
-        <input type="dateTime-local" value={dateTime} />
+        <input type="dateTime-local" onChange={(e) => setdateTime(e.target.value)} value={dateTime} />
       </form>
     </div>
   );

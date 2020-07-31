@@ -1,38 +1,41 @@
-import React, { useState } from "react";
-import Note from './Note';
+import React, { useState } from "react"
+import Note from "./Note"
 
 
-
-const handleSubmit = (e, notes, setNotes, taskName, setTaskName, dateTime, setdateTime) => {
+const handleSubmit = (e, notes, setNotes, input, setInput, dateTime, setDateTime) => {
   e.preventDefault()
-  const id = (notes.length) ? notes[notes.length - 1].id + 1 : 1
-  setNotes([...notes, { id: id, message: taskName, deadline: dateTime }])
-  console.log("test", notes.length)
-  setdateTime('')
-  setTaskName('')
+  if (input.length !== 0) {
+    const id = (notes.length) ? notes[notes.length - 1].id + 1 : 1
+    // console.log("note handleSubmit id", id)
+    setNotes([...notes, { id: id, message: input, deadline: dateTime }])
+    console.log("dssdd", notes)
+    setInput('')
+    setDateTime('')
+  }
 }
-const TodoList = () => {
-  const [taskName, setTaskName] = useState('')
-  const [dateTime, setdateTime] = useState('')
-  const [notes, setNotes] = useState([])
+const deleteNote = (id, notes, setNotes) => {
+  setNotes(notes.filter(note => note.id !== id))
+}
 
+
+export default () => {
+  const [notes, setNotes] = useState([
+  ])
+  const [input, setInput] = useState('')
+  const [dateTime, setDateTime] = useState('')
   return (
-    <div className="App">
-      <h1>Chris Akua Todo</h1>
-      <form onSubmit={(e) => handleSubmit(e, notes, setNotes, taskName, setTaskName, dateTime, setdateTime)}>
-        <input type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
-        <input type="dateTime-local" onChange={(e) => setdateTime(e.target.value)} value={dateTime} />
-        <button>Submit</button>
+    <div className="Notes">
+      <form onSubmit={(e) => handleSubmit(e, notes, setNotes, input, setInput, dateTime, setDateTime)}>
+        <input onChange={(e) => setInput(e.target.value)} value={input} />
+        <input type="datetime-local" onChange={(e) => setDateTime(e.target.value)} value={dateTime} />
+        <button>submit</button>
+
       </form>
       {
         notes.map(note => (
-          <Note
-            id={note.id} message={note.message} deadline={note.deadline} />
+          <Note message={note.message} id={note.id} dateTime={note.deadline} deleteNote={(id) => deleteNote(id, notes, setNotes)} />
         ))
       }
-
-    </div>
+    </div >
   )
 }
-
-export default TodoList;

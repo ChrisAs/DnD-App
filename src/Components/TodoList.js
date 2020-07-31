@@ -25,8 +25,8 @@ const TodoList = () => {
         <button>Submit</button>
       </form>
       {
-        notes.map(notes => (
-          <Note id={notes.id} message={notes.message} deadline={notes.deadline} />
+        notes.map(note => (
+          <Note id={note.id} message={note.message} deadline={note.deadline} />
         ))
       }
 
